@@ -5,12 +5,6 @@ applications with ActiveRecord. The extension handles attributes,
 associations, delegates and scopes. A must for any Rails app using YARD as
 documentation plugin.
 
-The plugin handles the following:
-
-*  Attributes
-*  Associations
-*  Scopes
-
 ## Attributes ##
 
 In order for this plugin to document any database attributes you need to add
@@ -52,6 +46,11 @@ The plugin handles `has_one`, `belongs_to`, `has_many` and
 `has_and_belongs_to_many` associations. The annotation for each association
 includes a link to the referred model. For associations with a list of objects
 the documentation will simply be marked as `Array<ModelName>`.
+
+## Delegates ##
+
+The plugin handles `delegate`-methods and marks these delegated instance
+methods simply as aliases for the associated object.
 
 ## Scopes ##
 
