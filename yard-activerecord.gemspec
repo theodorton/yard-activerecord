@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
-require 'YARD'
-require File.dirname(__FILE__) + '/lib/yard-activerecord'
-require File.dirname(__FILE__) + '/lib/yard-activerecord/version'
+$:.push File.expand_path("../lib", __FILE__)
+
+require "yard-activerecord/version"
 
 Gem::Specification.new do |s|
   s.name        = "yard-activerecord"
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     attributes, associations, delegates and scopes. A must for any Rails app
     using YARD as documentation plugin. }
 
-  s.add_development_dependency 'yard', '>= 0.7.0'
+  s.add_dependency 'yard', '>= 0.8.3'
 
   s.files         = `git ls-files`.split("\n")
   s.require_path  = "lib"
