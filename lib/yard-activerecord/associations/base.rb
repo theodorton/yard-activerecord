@@ -29,8 +29,8 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
         return_this = false
         while i < param_size - 1
           # May want to evaluate doing it this way
-          hash = eval('{' + statement.parameters[i].jump(:hash).source + '}')
-          return hash[:class_name] unless hash[:class_name].nil?
+          statement.parameters[i].jump(:hash).source =~ /(:class_name\s*=>|class_name:)\s*["']([^"']+)["']/
+          return $2 if $2
           i += 1
         end
       end
