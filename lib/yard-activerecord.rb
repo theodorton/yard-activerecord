@@ -3,15 +3,18 @@ require 'yard'
 module YARD::Handlers::Ruby::ActiveRecord
 end
 
-require_relative 'yard-activerecord/fields/create_table_handler'
-require_relative 'yard-activerecord/fields/define_handler'
-require_relative 'yard-activerecord/fields/field_handler'
+root = File.expand_path(File.dirname(__FILE__))
+$LOAD_PATH << root unless $LOAD_PATH.include? root
 
-require_relative 'yard-activerecord/associations/belongs_to_handler'
-require_relative 'yard-activerecord/associations/has_one_handler'
-require_relative 'yard-activerecord/associations/has_one_handler'
-require_relative 'yard-activerecord/associations/has_and_belongs_to_many_handler'
+require 'yard-activerecord/fields/create_table_handler'
+require 'yard-activerecord/fields/define_handler'
+require 'yard-activerecord/fields/field_handler'
 
-require_relative 'yard-activerecord/delegations/delegate_handler'
+require 'yard-activerecord/associations/belongs_to_handler'
+require 'yard-activerecord/associations/has_one_handler'
+require 'yard-activerecord/associations/has_many_handler'
+require 'yard-activerecord/associations/has_and_belongs_to_many_handler'
 
-require_relative 'yard-activerecord/scopes/scope_handler'
+require 'yard-activerecord/delegations/delegate_handler'
+
+require 'yard-activerecord/scopes/scope_handler'
