@@ -5,13 +5,29 @@ applications with ActiveRecord. The extension handles attributes,
 associations, delegates and scopes. A must for any Rails app using YARD as
 documentation plugin.
 
+
+## Installation ##
+
+Run the following command in order to load YARD plugins:
+
+```
+$ yard config load_plugins true
+```
+
 ## Attributes ##
 
 In order for this plugin to document any database attributes you need to add
-`schema.rb` to your list of files. This is preferably done with in `.yardopts`.
+`schema.rb` to your list of files. This is preferably done with in `.yardopts`
+within your app project folder:
 
-The `schema.rb`-file should be added at the end as it needs all classes loaded
-before it can add the attributes.
+```
+# .yardopts
+'app/**/*.rb'
+'db/schema.rb'
+```
+
+It's important that the `schema.rb`-file is added at the end as it needs all
+classes loaded before it can add the attributes.
 
 The plugin will then document all attributes in your documentation.
 

@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version     = YARD::ActiveRecord::VERSION
   s.authors     = ["Theodor Tonum"]
   s.email       = ["theodor@tonum.no"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/theodorton/yard-activerecord"
   s.summary     = %q{ActiveRecord Handlers for YARD}
   s.description = %q{
     YARD-Activerecord is a YARD extension that handles and interprets methods
