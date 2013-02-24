@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'yard', '>= 0.8.3'
 
+  s.add_development_dependency 'rspec'
+
   s.files         = `git ls-files`.split("\n")
   s.require_path  = "lib"
 end
