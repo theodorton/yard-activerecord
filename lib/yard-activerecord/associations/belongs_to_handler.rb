@@ -4,9 +4,13 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
   class BelongsToHandler < SingularHandler
     handles method_call(:belongs_to)
 
+    def group_name
+      'Belongs to'
+    end
+
     private
     def return_description
-      "#{namespace} <b>belongs to</b> a #{class_name}"
+      ''
     end
   end
 end

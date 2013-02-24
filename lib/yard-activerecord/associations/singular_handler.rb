@@ -8,7 +8,7 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
 
     private  
     def return_description
-      "An associated #{method_name}"
+      "An associated {#{method_name.humanize}}"
     end
   end
 end
