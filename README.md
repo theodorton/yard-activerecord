@@ -73,3 +73,10 @@ methods simply as aliases for the associated object.
 The plugin will add class methods for any scopes you have defined in your
 models.
 
+
+## Other useful plugins ##
+
+Check out:
+ 
+  * [https://github.com/ogeidix/yard-rails-plugin](https://github.com/ogeidix/yard-rails-plugin)
+

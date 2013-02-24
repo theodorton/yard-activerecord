@@ -5,18 +5,16 @@ module YARD::Handlers::Ruby::ActiveRecord::Fields
     handles method_call(:integer)
     handles method_call(:float)
     handles method_call(:boolean)
+    handles method_call(:timestamp)
     handles method_call(:datetime)
+    handles method_call(:date)
   
     def process
       return unless statement.namespace.jump(:ident).source == 't'
       method_name = call_params.first
-      class_name = caller_method.capitalize
       
       return if method_name['_id'] # Skip all id fields, associations will handle that
       
-      if class_name == "Datetime"
-        class_name = "DateTime"
-      end
       ensure_loaded! P(globals.klass)
       namespace = P(globals.klass)
       return if namespace.nil?
@@ -40,11 +38,21 @@ module YARD::Handlers::Ruby::ActiveRecord::Fields
     end
   
     def description(method_name)
-      "Database field value of #{method_name}. Defined in {file:db/schema.rb}"
+      '' # "Database field value of #{method_name}. Defined in {file:db/schema.rb}"
     end
   
     def get_tag(tag, text, return_classes)
       YARD::Tags::Tag.new(:return, text, [return_classes].flatten)
+    end
+
+    private
+
+    def class_name
+      if ['datetime', 'timestamp'].include?(caller_method)
+        'DateTime'
+      else
+        caller_method.capitalize
+      end
     end
   end
 end

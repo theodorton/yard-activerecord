@@ -6,7 +6,6 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
     namespace_only
 
     def process
-      group_name = "Active Record Associations"
       namespace.groups << group_name unless namespace.groups.include? group_name
 
       object           = YARD::CodeObjects::MethodObject.new(namespace, method_name)
@@ -16,6 +15,10 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
       object.docstring.add_tag get_tag(:see, 'http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html')
       object.dynamic = true
       register object
+    end
+
+    def group_name
+      "Active Record Associations"
     end
 
     private
@@ -36,9 +39,9 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
         end
       end
       if singularize == true
-        ActiveSupport::Inflector.singularize method_name.capitalize
+        method_name.camelize.singularize
       else
-        method_name.capitalize
+        method_name.camelize
       end
     end
 
