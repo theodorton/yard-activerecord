@@ -5,7 +5,8 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
     def class_name
       "Array<#{super(true)}>"
     end
-  
+
+    private
     def return_description
       "An array of associated #{method_name}"
     end

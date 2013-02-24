@@ -4,6 +4,7 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
   class HasManyHandler < PluralHandler
     handles method_call(:has_many)
 
+    private
     def return_description
       "#{namespace} <b>has many</b> #{method_name}"
     end

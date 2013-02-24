@@ -5,7 +5,8 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
     def class_name
       super(false)
     end
-  
+
+    private  
     def return_description
       "An associated #{method_name}"
     end
