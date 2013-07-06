@@ -18,23 +18,28 @@ module YARD::Handlers::Ruby::ActiveRecord::Fields
       ensure_loaded! P(globals.klass)
       namespace = P(globals.klass)
       return if namespace.nil?
+
+      method_definition = namespace.instance_attributes[method_name.to_sym] || {}
     
-      r_object = YARD::CodeObjects::MethodObject.new(namespace, method_name)
-      r_object.docstring = description(method_name)
-      r_object.docstring.add_tag get_tag(:return, '', class_name)
-      r_object.dynamic = true
-      register r_object
+      unless method_definition[:read]
+        r_object = YARD::CodeObjects::MethodObject.new(namespace, method_name)
+        r_object.docstring = description(method_name)
+        r_object.docstring.add_tag get_tag(:return, '', class_name)
+        r_object.dynamic = true
+        register r_object
+        method_definition[:read] = r_object
+      end
     
-      w_object = YARD::CodeObjects::MethodObject.new(namespace, "#{method_name}=")
-      w_object.docstring = description(method_name)
-      w_object.docstring.add_tag get_tag(:return, '', class_name)
-      w_object.dynamic = true
-      register w_object
-    
-      namespace.instance_attributes[method_name.to_sym] = {
-        read: r_object,
-        write: w_object
-      }
+      unless method_definition[:write]
+        w_object = YARD::CodeObjects::MethodObject.new(namespace, "#{method_name}=")
+        w_object.docstring = description(method_name)
+        w_object.docstring.add_tag get_tag(:return, '', class_name)
+        w_object.dynamic = true
+        register w_object
+        method_definition[:write] = w_object
+      end
+
+      namespace.instance_attributes[method_name.to_sym] = method_definition
     end
   
     def description(method_name)
