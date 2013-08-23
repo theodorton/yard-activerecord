@@ -18,23 +18,20 @@ module YARD::Handlers::Ruby::ActiveRecord::Fields
       ensure_loaded! P(globals.klass)
       namespace = P(globals.klass)
       return if namespace.nil?
-    
-      r_object = YARD::CodeObjects::MethodObject.new(namespace, method_name)
-      r_object.docstring = description(method_name)
-      r_object.docstring.add_tag get_tag(:return, '', class_name)
-      r_object.dynamic = true
-      register r_object
-    
-      w_object = YARD::CodeObjects::MethodObject.new(namespace, "#{method_name}=")
-      w_object.docstring = description(method_name)
-      w_object.docstring.add_tag get_tag(:return, '', class_name)
-      w_object.dynamic = true
-      register w_object
-    
-      namespace.instance_attributes[method_name.to_sym] = {
-        read: r_object,
-        write: w_object
-      }
+
+      method_definition = namespace.instance_attributes[method_name.to_sym] || {}
+      
+      { read: method_name, write: "#{method_name}=" }.each do |(rw, name)|
+        next if method_definition[rw]
+        rw_object = YARD::CodeObjects::MethodObject.new(namespace, name)
+        rw_object.docstring = description(name)
+        rw_object.docstring.add_tag get_tag(:return, '', class_name)
+        rw_object.dynamic = true
+        register rw_object
+        method_definition[rw] = r_object
+      end
+
+      namespace.instance_attributes[method_name.to_sym] = method_definition
     end
   
     def description(method_name)
