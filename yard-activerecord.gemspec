@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
     used when developing applications with ActiveRecord. The extension handles
     attributes, associations, delegates and scopes. A must for any Rails app
     using YARD as documentation plugin. }
+  s.licenses    = ["MIT License"]
 
   s.add_dependency 'yard', '>= 0.8.3'
 
