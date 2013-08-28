@@ -28,7 +28,7 @@ module YARD::Handlers::Ruby::ActiveRecord::Fields
         rw_object.docstring.add_tag get_tag(:return, '', class_name)
         rw_object.dynamic = true
         register rw_object
-        method_definition[rw] = r_object
+        method_definition[rw] = rw_object
       end
 
       namespace.instance_attributes[method_name.to_sym] = method_definition
