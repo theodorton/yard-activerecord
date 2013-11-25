@@ -19,7 +19,8 @@ module YARD::Handlers::Ruby::ActiveRecord::Delegations
       end
 
       params.each do |method_name|
-        method_name.gsub!(/[\:\'\"]/,'').prepend("#{prefix_name}_")
+        method_name.gsub!(/[\:\'\"]/,'')
+        method_name.prepend("#{prefix_name}_") unless prefix_name.length == 0
         object = YARD::CodeObjects::MethodObject.new(namespace, method_name)
         object.group = "Delegated Instance Attributes"
         object.docstring = "Alias for #{class_name}##{method_name}"
