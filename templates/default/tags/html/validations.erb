@@ -1,0 +1,8 @@
+<p class="tag_title">Validations<% if @condition %> (<i><%= @condition %></i> )<% end %>:</p>
+<ul class="validations">
+  <% for tag in @tags %>
+    <% for type in tag.types %>
+      <li><%= type %></li>
+    <% end %>
+  <% end %>
+</ul>

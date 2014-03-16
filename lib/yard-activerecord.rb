@@ -3,6 +3,8 @@ require 'yard'
 module YARD::Handlers::Ruby::ActiveRecord
 end
 
+YARD::Templates::Engine.register_template_path File.dirname(__FILE__) + '/../templates'
+
 root = File.expand_path(File.dirname(__FILE__))
 $LOAD_PATH << root unless $LOAD_PATH.include? root
 
@@ -18,3 +20,4 @@ require 'yard-activerecord/associations/has_and_belongs_to_many_handler'
 require 'yard-activerecord/delegations/delegate_handler'
 
 require 'yard-activerecord/scopes/scope_handler'
+require 'yard-activerecord/validations/validates_handler'
