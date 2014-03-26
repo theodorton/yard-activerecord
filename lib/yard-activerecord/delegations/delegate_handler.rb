@@ -19,7 +19,7 @@ module YARD::Handlers::Ruby::ActiveRecord::Delegations
         object.docstring = "Alias for {#{class_name}##{method_name}}"
         object.docstring.add_tag get_tag(:return,
             "{#{class_name}##{method_name}}", 'Object')
-        object.docstring.add_tag get_tag(:see,
+        object.docstring.add_tag get_tag(:see,"Module#delegate",nil,
             "http://api.rubyonrails.org/classes/Module.html#method-i-delegate")
         register object
       end
@@ -29,8 +29,8 @@ module YARD::Handlers::Ruby::ActiveRecord::Delegations
 
     private
 
-    def get_tag(tag, text, return_classes = [])
-      YARD::Tags::Tag.new(tag, text, [return_classes].flatten)
+    def get_tag(tag, text, return_classes = [], name=nil)
+      YARD::Tags::Tag.new(tag, text, [return_classes].flatten,name)
     end
   end
 end
