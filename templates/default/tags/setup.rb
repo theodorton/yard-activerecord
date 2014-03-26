@@ -9,19 +9,14 @@ end
 def validates
   all_tags = object.tags(:validates)
   out = ''
-  conditions = all_tags.map{| tag | tag.pair.join }.uniq.compact
+  conditions = all_tags.map{| tag | tag.pair.to_s }.uniq.compact
   conditions.each do | condition |
-    @tags = all_tags.select{|tag| tag.pair.join == condition }
-    unless condition.empty?
-      options = @tags.first.pair
-      condition = options.first.capitalize + ' '
-      if options.last =~/^:/ # it's a symbol, convert to link
-        condition << linkify(options.last.gsub(/^:/,'#'))
-      else
-        condition << options.last
-      end
+    @tags = all_tags.select{|tag| tag.pair.to_s == condition }
+    condition = @tags.first.pair.map do | type, check |
+      check = linkify( check.gsub(/^:/,'#') ) if check =~/^:/ # it's a symbol, convert to link
+      "#{type} => #{check}"
     end
-    @condition = condition.empty? ? nil : condition
+    @condition = condition.empty? ? nil : condition.join(',')
     out << erb( :validations )
   end
   out

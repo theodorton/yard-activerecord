@@ -5,6 +5,7 @@ module YARD::Handlers::Ruby::ActiveRecord::Fields
     handles method_call(:integer)
     handles method_call(:float)
     handles method_call(:boolean)
+    handles method_call(:decimal)
     handles method_call(:timestamp)
     handles method_call(:datetime)
     handles method_call(:date)

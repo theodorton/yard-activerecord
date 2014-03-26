@@ -3,6 +3,41 @@ require 'active_support/core_ext/array'
 
 module YARD::Handlers::Ruby::ActiveRecord::Validate
 
+  # Links with a value of nil will be link to
+  # the Rails Validations guide.
+  # Other projects can add to the
+  STANDARD_LINKS = [
+    :acceptance,
+    :validates_associated,
+    :confirmation,
+    :exclusion,
+    :format,
+    :inclusion,
+    :length,
+    :numericality,
+    :presence,
+    :absence,
+    :uniqueness,
+    :validates_with,
+    :validates_each
+  ]
+
+  def self.add_validation_type( type, link )
+    @custom_types ||= {}
+    @custom_types[type.to_sym] = link
+  end
+
+  def self.link_for_validation( type )
+    type = type.downcase.to_sym
+    if STANDARD_LINKS.include?( type )
+      "http://edgeguides.rubyonrails.org/active_record_validations.html##{type}"
+    elsif @custom_types && link = @custom_types[ type ]
+      link
+    else
+      nil
+    end
+  end
+
   # Define validations tag for later use
   YARD::Tags::Library.define_tag("Validations", :validates )
 
@@ -15,12 +50,11 @@ module YARD::Handlers::Ruby::ActiveRecord::Validate
   class ValidatesHandler < YARD::Handlers::Ruby::MethodHandler
     namespace_only
     handles method_call(:validates)
-
     def process
 
       validations = {}
       attributes  = []
-      conditions = []
+      conditions  = {}
 
       # Read each parameter to the statement and parse out
       # it's type and intent
@@ -28,10 +62,10 @@ module YARD::Handlers::Ruby::ActiveRecord::Validate
         # list types are options
         if param.type == :list
           param.each do | n |
-            kw = n.jump(:ident, :kw, :tstring_content ).source
+            kw = n.jump(:label, :symbol_literal ).source.gsub(/:/,'')
             # if/unless are conditions that apply to all the validations
-            if kw == 'if' || kw=='unless'
-              conditions = [kw, n.children.last.source ]
+            if ['if','unless','on'].include?(kw)
+              conditions[ kw ] = n.children.last.source
             else # otherwise it's type specific
               opts = n.jump(:hash)
               value = ( opts != n ) ? opts.source : nil
@@ -50,6 +84,10 @@ module YARD::Handlers::Ruby::ActiveRecord::Validate
       attributes.each do | attribute |
         method_definition = namespace.instance_attributes[attribute.to_sym] || {}
         method = method_definition[:read]
+        if ! method
+          meths = namespace.meths(:all => true)
+          method = meths.find {|m| m.name == attribute.to_sym }
+        end
         # If the method isn't defined yet, go ahead and create one
         if ! method
           method = YARD::CodeObjects::MethodObject.new(namespace, attribute )
@@ -60,13 +98,13 @@ module YARD::Handlers::Ruby::ActiveRecord::Validate
           namespace.instance_attributes[attribute.to_sym] = method_definition
         end
         tag = YARD::Tags::OptionTag.new(:validates, '', conditions ) #, [] )
-        tag.types = []
-        validations.each{ |arg,options| 
-          tag.types << ( arg.capitalize + ( options ? "(#{options})" : '' ) )
+        tag.types = {} #[]
+        validations.each{ |arg,options|
+          tag.types[ arg ] = options
         }
         method.docstring.add_tag tag
       end
-      
+
     end
   end
 
