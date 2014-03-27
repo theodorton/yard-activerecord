@@ -14,14 +14,13 @@ module YARD::Handlers::Ruby::ActiveRecord::Delegations
       class_name = class_name.to_s.gsub(/\A.*\:/,'').capitalize
       params.each do |method_name|
         method_name.gsub!(/[\:\'\"]/,'')
-        object = YARD::CodeObjects::MethodObject.new(namespace, method_name)
+        object = register YARD::CodeObjects::MethodObject.new(namespace, method_name)
         object.group = "Delegated Instance Attributes"
         object.docstring = "Alias for {#{class_name}##{method_name}}"
         object.docstring.add_tag get_tag(:return,
             "{#{class_name}##{method_name}}", 'Object')
         object.docstring.add_tag get_tag(:see,"Module#delegate",nil,
             "http://api.rubyonrails.org/classes/Module.html#method-i-delegate")
-        register object
       end
       group_name = "Delegated Instance Attributes"
       namespace.groups << group_name unless namespace.groups.include? group_name

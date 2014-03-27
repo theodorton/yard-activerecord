@@ -90,10 +90,9 @@ module YARD::Handlers::Ruby::ActiveRecord::Validate
         end
         # If the method isn't defined yet, go ahead and create one
         if ! method
-          method = YARD::CodeObjects::MethodObject.new(namespace, attribute )
+          method = register YARD::CodeObjects::MethodObject.new(namespace, attribute )
           method.scope = :instance
           method.explicit = false
-          register method
           method_definition[:read] = method
           namespace.instance_attributes[attribute.to_sym] = method_definition
         end

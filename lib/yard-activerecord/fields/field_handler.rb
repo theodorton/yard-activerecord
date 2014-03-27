@@ -28,11 +28,10 @@ module YARD::Handlers::Ruby::ActiveRecord::Fields
           method.docstring.add_tag( get_tag(:return, '', class_name) ) unless method.has_tag?( :return )
           next
         end
-        rw_object = YARD::CodeObjects::MethodObject.new(namespace, name)
+        rw_object = register YARD::CodeObjects::MethodObject.new(namespace, name)
         rw_object.docstring = description(name)
         rw_object.docstring.add_tag get_tag(:return, '', class_name)
         rw_object.dynamic = true
-        register rw_object
         method_definition[rw] = rw_object
       end
 
