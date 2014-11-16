@@ -77,6 +77,18 @@ methods simply as aliases for the associated object.
 The plugin will add class methods for any scopes you have defined in your
 models.
 
+## Validations ##
+
+The plugin will add information about validations onto each field.  It only handles
+the new style validations in the form of:
+
+    validates :foo, :presence=>true, :length=>{ is: 6 }
+
+Validations in the older form of:
+
+    validates_presence_of :foo
+
+are not supported.
 
 ## Other useful plugins
 
