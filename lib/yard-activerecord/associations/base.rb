@@ -8,13 +8,13 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
     def process
       namespace.groups << group_name unless namespace.groups.include? group_name
 
-      object           = YARD::CodeObjects::MethodObject.new(namespace, method_name)
+      object           = register YARD::CodeObjects::MethodObject.new(namespace, method_name)
       object.group     = group_name
-      object.docstring = return_description
+      object.docstring = return_description if object.docstring.empty?
       object.docstring.add_tag get_tag(:return, '', class_name)
-      object.docstring.add_tag get_tag(:see, 'http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html')
+      object.docstring.add_tag get_tag(:see, "ActiveRecord::Associations", nil,
+        'http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html' )
       object.dynamic = true
-      register object
     end
 
     def group_name
@@ -49,8 +49,8 @@ module YARD::Handlers::Ruby::ActiveRecord::Associations
       "An array of associated #{method_name}."
     end
 
-    def get_tag(tag, text, return_classes = [])
-      YARD::Tags::Tag.new(tag, text, [return_classes].flatten)
+    def get_tag(tag, text, return_classes = [], name=nil)
+      YARD::Tags::Tag.new(tag, text, [return_classes].flatten, name)
     end
   end
 end

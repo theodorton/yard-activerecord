@@ -6,12 +6,11 @@ module YARD::Handlers::Ruby::ActiveRecord::Scopes
     namespace_only
     
     def process
-      object = YARD::CodeObjects::MethodObject.new(namespace, method_name, :class)
+      object = register YARD::CodeObjects::MethodObject.new(namespace, method_name, :class)
       object.docstring = return_description
       object.docstring.add_tag get_tag(:return, '', class_name)
-      object.docstring.add_tag get_tag(:see,
-'http://api.rubyonrails.org/classes/ActiveRecord/NamedScope/ClassMethods.html')
-      register object
+      object.docstring.add_tag get_tag(:see,"ActiveRecord::Scoping", nil,
+        'http://api.rubyonrails.org/classes/ActiveRecord/Scoping/Named/ClassMethods.html')
     end
     
     private
@@ -29,8 +28,8 @@ module YARD::Handlers::Ruby::ActiveRecord::Scopes
       "Array<#{namespace}>"
     end
 
-    def get_tag(tag, text, return_classes = [])
-      YARD::Tags::Tag.new(tag, text, [return_classes].flatten)
+    def get_tag(tag, text, return_classes = [],name=nil)
+      YARD::Tags::Tag.new(tag, text, [return_classes].flatten,name)
     end
   end
 end
