@@ -19,13 +19,13 @@ module YARD::Handlers::Ruby::ActiveRecord::Scopes
     end
     
     def return_description
-      "An array of #{ActiveSupport::Inflector.pluralize namespace.to_s} " +
+      "A relation of #{ActiveSupport::Inflector.pluralize namespace.to_s} " +
       "that are #{method_name.split('_').join(' ')}. " +
       "<strong>Active Record Scope</strong>"
     end
     
     def class_name
-      "Array<#{namespace}>"
+      "ActiveRecord::Relation<#{namespace}>"
     end
 
     def get_tag(tag, text, return_classes = [],name=nil)

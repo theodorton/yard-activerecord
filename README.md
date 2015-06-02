@@ -65,7 +65,7 @@ The documentation will then be skipped for this table/class.
 The plugin handles `has_one`, `belongs_to`, `has_many` and
 `has_and_belongs_to_many` associations. The annotation for each association
 includes a link to the referred model. For associations with a list of objects
-the documentation will simply be marked as `Array<ModelName>`.
+the documentation will simply be marked as `ActiveRecord::Relation<ModelName>`.
 
 ## Delegates
 
