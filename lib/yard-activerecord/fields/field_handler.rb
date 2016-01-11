@@ -1,5 +1,7 @@
 module YARD::Handlers::Ruby::ActiveRecord::Fields
   class FieldHandler < YARD::Handlers::Ruby::MethodHandler
+    in_file 'schema.rb'
+
     handles method_call(:string)
     handles method_call(:text)
     handles method_call(:integer)
