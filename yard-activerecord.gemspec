@@ -1,7 +1,4 @@
-# -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-
-require "yard-activerecord/version"
+require_relative "lib/yard-activerecord/version"
 
 Gem::Specification.new do |s|
   s.name        = "yard-activerecord"
@@ -15,13 +12,14 @@ Gem::Specification.new do |s|
     used when developing applications with ActiveRecord. The extension handles
     attributes, associations, delegates and scopes. A must for any Rails app
     using YARD as documentation plugin. }
-  s.licenses    = ["MIT License"]
+  s.license     = "MIT"
+
+  s.files       = Dir.chdir(File.expand_path(__dir__)) do
+    Dir["{lib,templates}/**/*", "LICENSE", "README.md"]
+  end
 
   s.add_dependency 'yard', '>= 0.8.3'
   s.add_dependency 'activesupport'
 
   s.add_development_dependency 'rspec'
-
-  s.files         = `git ls-files`.split("\n")
-  s.require_path  = "lib"
 end
