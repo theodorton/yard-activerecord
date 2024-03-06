@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.licenses    = ["MIT License"]
 
   s.add_dependency 'yard', '>= 0.8.3'
+  s.add_dependency 'activesupport'
 
   s.add_development_dependency 'rspec'
 
