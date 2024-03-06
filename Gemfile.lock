@@ -1,0 +1,35 @@
+PATH
+  remote: .
+  specs:
+    yard-activerecord (0.0.16)
+      yard (>= 0.8.3)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    diff-lcs (1.5.1)
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-core (3.13.0)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-support (3.13.1)
+    yard (0.9.36)
+
+PLATFORMS
+  arm64-darwin-23
+  ruby
+
+DEPENDENCIES
+  rspec
+  yard-activerecord!
+
+BUNDLED WITH
+   2.5.6
