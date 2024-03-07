@@ -41,25 +41,6 @@ handling of `attr_accessible` at a later point.
 Please note that any reference-fields that ends with `_id` will not be handled
 as an attribute. Please see Associations.
 
-There is an issue with namespaced classes. Currently this plugin will try and
-fetch a class with a namespace if it does not find one at the first try.
-
-Example:
-
-    Table name        Class name
-    sales_people      SalesPeople # does not exist
-    sales_people      Sales::People # does exist
-
-A problem then emerges if you have namespaces with two names.
-
-Example:
-
-    Table name          Class name
-    sales_force_people  SalesForcePeople # does not exist
-    sales_force_people  Sales::ForcePeople # does not exist
-
-The documentation will then be skipped for this table/class.
-
 ## Associations
 
 The plugin handles `has_one`, `belongs_to`, `has_many` and
