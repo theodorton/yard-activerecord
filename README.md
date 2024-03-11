@@ -9,7 +9,6 @@ applications with ActiveRecord. The extension handles attributes,
 associations, delegates and scopes. A must for any Rails app using YARD as
 documentation plugin.
 
-
 ## Installation
 
 Run the following command in order to load YARD plugins:
@@ -58,9 +57,9 @@ methods simply as aliases for the associated object.
 The plugin will add class methods for any scopes you have defined in your
 models.
 
-## Validations ##
+## Validations
 
-The plugin will add information about validations onto each field.  It only handles
+The plugin will add information about validations onto each field. It only handles
 the new style validations in the form of:
 
     validates :foo, :presence=>true, :length=>{ is: 6 }
@@ -75,5 +74,4 @@ are not supported.
 
 Check out:
 
-  * [https://github.com/ogeidix/yard-rails-plugin](https://github.com/ogeidix/yard-rails-plugin)
-
+- [https://github.com/ogeidix/yard-rails-plugin](https://github.com/ogeidix/yard-rails-plugin)
