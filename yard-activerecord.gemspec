@@ -6,7 +6,7 @@
 
 Gem::Specification.new do |s|
   s.name = "yard-activerecord"
-  s.version = "0.0.14"
+  s.version = "0.0.16"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
