@@ -3,12 +3,12 @@ require_relative 'base'
 module YARD::Handlers::Ruby::ActiveRecord::Associations
   class PluralHandler < Base
     def class_name
-      "Array<#{super(true)}>"
+      "ActiveRecord::Relation<#{super(true)}>"
     end
 
     private
     def return_description
-      "An array of associated #{method_name.humanize}"
+      "A relationship to the associated #{method_name.humanize} that can have further scopes chained on it or converted to an array with #to_a"
     end
   end
 end
