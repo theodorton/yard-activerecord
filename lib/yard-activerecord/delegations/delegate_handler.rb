@@ -22,7 +22,7 @@ module YARD::Handlers::Ruby::ActiveRecord::Delegations
         method_name.gsub!(/[\:\'\"]/,'')
         original_method_name = method_name.dup
 
-        unless prefix_name.length == 0
+        if prefix_name&.length&.> 0
           prefix_name = class_name.downcase if prefix_name == 'true'
           method_name.prepend("#{prefix_name}_")
         end
