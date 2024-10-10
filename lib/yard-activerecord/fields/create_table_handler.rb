@@ -1,6 +1,5 @@
 require 'yard'
-require 'active_support/inflector'
-  
+
 module YARD::Handlers::Ruby::ActiveRecord::Fields
   class CreateTableHandler < YARD::Handlers::Ruby::MethodHandler
     handles method_call(:create_table)

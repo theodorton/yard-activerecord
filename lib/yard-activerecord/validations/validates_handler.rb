@@ -1,11 +1,3 @@
-require 'active_support/version'
-if ActiveSupport::VERSION::MAJOR == 7
-  require 'active_support/deprecator'
-  require 'active_support/deprecation'
-end
-require 'active_support/inflector'
-require 'active_support/core_ext/array'
-
 module YARD::Handlers::Ruby::ActiveRecord::Validate
 
   # Links with a value of nil will be link to
