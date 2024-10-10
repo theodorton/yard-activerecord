@@ -1,5 +1,4 @@
 require 'yard'
-require 'active_support/inflector'
 
 module YARD::Handlers::Ruby::ActiveRecord::Associations
   class Base < YARD::Handlers::Ruby::MethodHandler

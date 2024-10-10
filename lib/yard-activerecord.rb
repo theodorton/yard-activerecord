@@ -1,4 +1,7 @@
 require 'yard'
+require 'active_support'
+require 'active_support/inflector'
+require 'active_support/core_ext/array'
 
 module YARD::Handlers::Ruby::ActiveRecord
 end
